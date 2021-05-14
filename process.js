@@ -4,7 +4,7 @@ var fs = require("fs");
 var xml2json = require("xml2json");
 
 const POINT_SIZE = 6;
-const POINT_ROW_COUNT = 50;
+const POINT_ROW_COUNT = 30;
 const DO_DRAW_POINTS = true;
 
 function generatePoints(width, height, numrows) {
@@ -101,15 +101,21 @@ PImage.decodePNGFromStream(fs.createReadStream("example.png")).then((img) => {
 		});
 	}
 
-	var svgtext = generateSvg(img.width, img.height, triangles.map((point_idxs, i) => {
+	// generate svg
+	var triangle_data = triangles.map((point_idxs, i) => {
 		return {
 			points: point_idxs.map(idx => points[idx]),
 			color: triangle_colors[i]
 		}
-	}));
-	fs.writeFileSync("out.svg", svgtext);
-	// save
-	PImage.encodePNGToStream(img, fs.createWriteStream("out.png")).then(() => {
-		console.log("done writing");
+	});
+	var svgtext = generateSvg(img.width, img.height, triangle_data);
+
+	// save files
+	var out_svg_name = "out.svg";
+	var out_png_name = "out.png";
+	fs.writeFileSync(out_svg_name, svgtext);
+	console.log(`generated ${out_svg_name}!`);
+	PImage.encodePNGToStream(img, fs.createWriteStream(out_png_name)).then(() => {
+		console.log(`generated ${out_png_name}!`);
 	});
 });
