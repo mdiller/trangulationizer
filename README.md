@@ -9,6 +9,9 @@ This at the moment is a very rough simple script that takes a png image as input
 - [ ] Colors for each triangle are currently grabbed from the pixel in the center of that triangle. We should find a way to average the pixels within that triangle
 - [ ] Maybe even more color options somehow?
 - [ ] Additional svg generation options?
+- [ ] Make a thing to automatically mirror one side to the other, optionally with/without color
+- [ ] Give all the paths/triangles a separate id
+- [ ] Maybe a way to do intelligent grouping for animations?
 
 ## Usage
 
